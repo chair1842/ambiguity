@@ -11,5 +11,3 @@ void Entity::draw(RenderTarget& target) {
     }
     target.draw(*drawable);
 }
-
-void Entity::update(float dt, vector<unique_ptr<Entity>>& entity_list) {}
