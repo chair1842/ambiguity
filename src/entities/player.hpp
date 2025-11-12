@@ -7,6 +7,6 @@ class Player : public Entity {
 public:
 	const int speed = 500;
 
-	Player(float size, Vector2f position, Color color);
+	Player(float size, Vector2f position);
 	void update(float dt) override;
 };

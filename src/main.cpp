@@ -39,10 +39,7 @@ int main() {
 
 		// Clear and display
         window.clear();
-		for (auto& e : entity_list) {
-            e->sync_shape();
-            window.draw(e->shape);
-        }
+        // draw all entities
         window.display();
     }
 
