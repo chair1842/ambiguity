@@ -13,5 +13,5 @@ public:
 
     virtual void draw(RenderTarget& target);
 
-    virtual void update(float dt, const vector<unique_ptr<Entity>>& entity_list);
+    virtual void update(float dt, vector<unique_ptr<Entity>>& entity_list);
 };

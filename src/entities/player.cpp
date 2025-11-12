@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-void Player::update(float dt, const vector<unique_ptr<Entity>>& entity_list) {
+void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
 	Vector2f velocity;
 
 	if (Keyboard::isKeyPressed(Keyboard::Scan::W) || Keyboard::isKeyPressed(Keyboard::Scan::Up)) {

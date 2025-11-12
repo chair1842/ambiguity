@@ -1,6 +1,6 @@
 #include "entity.hpp"
 
-Entity::Entity(Vector2f position = { 0,0 }, Vector2f rect_size = { 0,0 })
+Entity::Entity(Vector2f position, Vector2f rect_size)
     : position(position), rect_size(rect_size) { }
 
 void Entity::draw(RenderTarget& target) {
@@ -12,4 +12,4 @@ void Entity::draw(RenderTarget& target) {
     target.draw(*drawable);
 }
 
-void Entity::update(float dt, const vector<unique_ptr<Entity>>& entity_list) {}
+void Entity::update(float dt, vector<unique_ptr<Entity>>& entity_list) {}
