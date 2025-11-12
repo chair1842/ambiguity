@@ -23,7 +23,6 @@ void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
 
 	// clamp the position to bounds
 	position = Vector2f(clamp<float>(position.x, 0, 480 - rect_size.x), clamp<float>(position.y, 0, 480 - rect_size.y)); // rect.y isnt nessecary, but anyways
-
 }
 
 Player::Player(float size, Vector2f pos) 
