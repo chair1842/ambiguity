@@ -1,6 +1,6 @@
 #include "player.hpp"
 
-void Player::update(float dt){
+void Player::update(float dt, const vector<unique_ptr<Entity>>& entity_list) {
 	Vector2f velocity;
 
 	if (Keyboard::isKeyPressed(Keyboard::Scan::W) || Keyboard::isKeyPressed(Keyboard::Scan::Up)) {
@@ -23,7 +23,12 @@ void Player::update(float dt){
 
 	// clamp the position to bounds
 	position = Vector2f(clamp<float>(position.x, 0, 480 - rect_size.x), clamp<float>(position.y, 0, 480 - rect_size.y)); // rect.y isnt nessecary, but anyways
+
 }
 
-Player::Player(float size, Vector2f position) 
-	: Entity(position, { size, size }) {}
+Player::Player(float size, Vector2f pos) 
+	: Entity(pos, { size, size }) {
+	auto r = make_unique<RectangleShape>(Vector2f{ size, size });
+	r->setFillColor(Color(128, 128, 255));
+	drawable = move(r);
+}

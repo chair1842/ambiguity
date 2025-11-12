@@ -12,7 +12,7 @@ int main() {
     window.setFramerateLimit(60);
 
     vector<unique_ptr<Entity>> entity_list;
-    entity_list.push_back(make_unique<Player>(32, Vector2f{ 0, 0 }, Color(128,128,255)));
+    entity_list.push_back(make_unique<Player>(32, Vector2f{ 224, 224 }));
 
     auto last_time = chrono::high_resolution_clock::now();
 
@@ -34,12 +34,14 @@ int main() {
         // vuvu :3
         // update loop for all entities
         for (auto& e : entity_list) {
-            e->update(dt);
+            e->update(dt, entity_list);
         }
 
 		// Clear and display
         window.clear();
-        // draw all entities
+		for (auto& e : entity_list) {
+            e->draw(window); // wow, very nice
+        }
         window.display();
     }
 
