@@ -1,6 +1,5 @@
 #include "player.hpp"
 
-
 void Player::update(float dt){
 	Vector2f velocity;
 
@@ -19,7 +18,7 @@ void Player::update(float dt){
 
 	velocity = (velocity == Vector2f(0, 0)) 
 		? velocity 
-		: Vector2f(velocity.normalized().x * speed, velocity.normalized().y * speed); // There is a better way (what way)
+		: velocity.normalized() * static_cast<float>(speed); // The way has been found
 	position += velocity;
 
 	// clamp the position to bounds
