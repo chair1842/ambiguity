@@ -5,8 +5,8 @@ using namespace std;
 
 class Player : public Entity {
 public:
-	const int speed = 5;
+	const int speed = 500;
 
-	Player(float size, Vector2f position);
+	Player(float size, Vector2f position, Color color);
 	void update(float dt) override;
 };

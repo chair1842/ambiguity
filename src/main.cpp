@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "entities/player.hpp"
 using namespace sf;
 using namespace std;
@@ -10,10 +11,10 @@ int main() {
     auto window = RenderWindow(VideoMode({480u, 480u}), "Avoidance");
     window.setFramerateLimit(60);
 
-    Player player(32, {0,0});
+    vector<unique_ptr<Entity>> entity_list;
+    entity_list.push_back(make_unique<Player>(32, Vector2f{ 0, 0 }, Color(128,128,255)));
 
-    RectangleShape rect;
-    rect.setSize(player.rect);
+    auto last_time = chrono::high_resolution_clock::now();
 
     // Main game loop
     while (window.isOpen()) {
@@ -26,12 +27,22 @@ int main() {
             }
         }
 
-        player.update(0);
-        rect.setPosition(player.position);
+        auto now = chrono::high_resolution_clock::now();
+        float dt = duration_cast<chrono::duration<float>>(now - last_time).count();
+        last_time = now;
+
+        // vuvu :3
+        // update loop for all entities
+        for (auto& e : entity_list) {
+            e->update(dt);
+        }
 
 		// Clear and display
         window.clear();
-        window.draw(rect);
+		for (auto& e : entity_list) {
+            e->sync_shape();
+            window.draw(e->shape);
+        }
         window.display();
     }
 

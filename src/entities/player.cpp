@@ -18,12 +18,12 @@ void Player::update(float dt){
 
 	velocity = (velocity == Vector2f(0, 0)) 
 		? velocity 
-		: velocity.normalized() * static_cast<float>(speed); // The way has been found
+		: velocity.normalized() * static_cast<float>(speed) * dt; // The way has been found
 	position += velocity;
 
 	// clamp the position to bounds
-	// position = clamp<float>(0, 0, 0); // ill work on this tomorrow
+	position = Vector2f(clamp<float>(position.x, 0, 480 - rect_size.x), clamp<float>(position.y, 0, 480 - rect_size.y)); // rect.y isnt nessecary, but anyways
 }
 
-Player::Player(float size, Vector2f position)
-	: Entity(position, { size, size }) {}
+Player::Player(float size, Vector2f position, Color color) 
+	: Entity(position, { size, size }, color) {}
