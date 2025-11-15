@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include "entities/player.hpp"
+#include "entities/shooter.hpp"
 using namespace sf;
 using namespace std;
 
@@ -13,6 +14,10 @@ int main() {
 
     vector<unique_ptr<Entity>> entity_list;
     entity_list.push_back(make_unique<Player>(32, Vector2f{ 224, 224 }));
+	entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 16 }));
+    entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 16 }));
+    //entity_list.push_back(make_unique<Shooter>(Vector2f{ 464, 464 }));
+    //entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 464 }));
 
     auto last_time = chrono::high_resolution_clock::now();
 

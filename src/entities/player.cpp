@@ -26,8 +26,12 @@ void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
 }
 
 Player::Player(float size, Vector2f pos) 
-	: Entity(pos, { size, size }) {
+	: CollisionEntity(pos, { size, size }) {
 	auto r = make_unique<RectangleShape>(Vector2f{ size, size });
 	r->setFillColor(Color(128, 128, 255));
 	drawable = move(r);
+}
+
+void Player::quit(RenderWindow& window) {
+	window.close();
 }

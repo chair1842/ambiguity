@@ -1,3 +1,4 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <memory>
 using namespace sf;
@@ -6,6 +7,7 @@ using namespace std;
 class Entity {
 public:
     Vector2f position;
+    float rotation = 0; // in degrees
     Vector2f rect_size;
     unique_ptr<Drawable> drawable; // points to actual shape or sprite
 

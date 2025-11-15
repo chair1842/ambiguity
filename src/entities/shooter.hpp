@@ -1,0 +1,13 @@
+#pragma once
+#include "entity.hpp"
+#include "bullet.hpp"
+
+class Shooter : public Entity {
+public:
+	int cooldown = 50; // centiseconds
+	int tsls = 0; // time since last shot in centiseconds
+
+	Shooter(Vector2f position, int cooldown = 50);
+	void update(float dt, vector<unique_ptr<Entity>>& entity_list) override;
+	void shoot(vector<unique_ptr<Entity>>& entity_list);
+};
