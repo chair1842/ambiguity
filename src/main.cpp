@@ -36,6 +36,8 @@ int main() {
         float dt = duration_cast<chrono::duration<float>>(now - last_time).count();
         last_time = now;
 
+        vector<unique_ptr<Entity>> to_spawn;
+
         // vuvu :3
         // update loop for all entities
         for (auto& e : entity_list) {
@@ -44,10 +46,17 @@ int main() {
 
         // look for entities to delete
         entity_list.erase(
+			// remove if from all of the entities, if to_delete is true
             remove_if(entity_list.begin(), entity_list.end(),
                 [](const unique_ptr<Entity>& e) { return e->to_delete; }),
             entity_list.end()
         );
+
+        // spawn buffer
+        for (auto& e : to_spawn) {
+            entity_list.push_back(std::move(e));
+        }
+        to_spawn.clear(); // clear the spawn buffer
 
 		// Clear and display
         window.clear();
