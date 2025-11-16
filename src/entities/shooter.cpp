@@ -12,6 +12,7 @@ Shooter::Shooter(Vector2f position, int cldwn)
 	cooldown = cldwn;
 	auto r = make_unique<RectangleShape>(Vector2f{ 32, 32 });
 	r->setFillColor(Color(255, 128, 128));
+	r->setOrigin({ 16,16 });
 	drawable = move(r);
 }
 
@@ -26,6 +27,9 @@ void Shooter::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<u
 		}
 	}
 	if (!player) { shoots.stop(); to_delete = true; return; } // no player found
+
+	Vector2f direction = player->position - position;
+	rotation = atan2f(direction.y, direction.x) * 180.0f / 3.14159265f;
 
 	// simple AI: shoot towards the player if cooldown is over
 	if (tsls >= cooldown) {
@@ -51,6 +55,6 @@ void Shooter::shoot(vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<E
 	Vector2f direction = player->position - position;
 	float angle = atan2f(direction.y, direction.x) * 180.0f / 3.14159265f; // Pie dont get it ;P
 	// create a new bullet and add it to entity_list
-	auto bullet = make_unique<Bullet>(angle, position + rect_size / 2.0f);
+	auto bullet = make_unique<Bullet>(angle, position + rect_size / 4.0f);
 	to_spawn.push_back(move(bullet));
 }

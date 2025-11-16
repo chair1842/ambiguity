@@ -12,6 +12,8 @@ public:
 	int lives = 5;
 	SoundBuffer hitsbuff;
 	Sound hits;
+	SoundBuffer painbuff;
+	Sound pains;
 
 	Player(float size, Vector2f position);
 	void update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) override;

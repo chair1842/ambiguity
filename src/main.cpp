@@ -16,10 +16,10 @@ int main() {
 
 	vector<unique_ptr<Entity>> entity_list;
 	entity_list.push_back(make_unique<Player>(32, Vector2f{ 224, 224 }));
-	entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 16 }));
-	entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 16 }, 49));
-	entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 432 }, 75));
-	entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 432 }, 60));
+	entity_list.push_back(make_unique<Shooter>(Vector2f{ 32, 32 }));
+	entity_list.push_back(make_unique<Shooter>(Vector2f{ 448, 32 }, 49));
+	entity_list.push_back(make_unique<Shooter>(Vector2f{ 448, 448 }, 75));
+	entity_list.push_back(make_unique<Shooter>(Vector2f{ 32, 448 }, 60));
 
 	for (auto& e : entity_list) {
 		e->enter();
@@ -50,6 +50,7 @@ int main() {
 		println("Or do YOU hate the RAIN?");
 		println("Cause I haven't heard it.");
 		println("\nFailed to load rain.wav");
+		return -1;
 	}
 	rain.setVolume(10);
 	rain.setLooping(true);
