@@ -16,5 +16,7 @@ public:
 
     virtual void draw(RenderTarget& target);
 
-    virtual void update(float dt, vector<unique_ptr<Entity>>& entity_list) {}
+    virtual void update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) {}
+    virtual void exit() {}
+    virtual void enter() {}
 };

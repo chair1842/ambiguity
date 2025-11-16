@@ -1,6 +1,6 @@
 #include "bullet.hpp"
 
-void Bullet::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
+void Bullet::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) {
 	// move the bullet according to rotation and speed
 	// then delete it if it goes out of bounds
 	const float rad = rotation * (3.14159265f / 180.0f);

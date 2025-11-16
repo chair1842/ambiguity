@@ -1,6 +1,11 @@
 #include "player.hpp"
 
-void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
+void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) {
+	if (is_hit) {
+		to_delete = true;
+		return;
+	}
+
 	Vector2f velocity;
 
 	if (Keyboard::isKeyPressed(Keyboard::Scan::W) || Keyboard::isKeyPressed(Keyboard::Scan::Up)) {
@@ -32,6 +37,7 @@ Player::Player(float size, Vector2f pos)
 	drawable = move(r);
 }
 
+// to use
 void Player::quit(RenderWindow& window) {
 	window.close();
 }

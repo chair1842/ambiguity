@@ -41,8 +41,14 @@ int main() {
         // vuvu :3
         // update loop for all entities
         for (auto& e : entity_list) {
-            e->update(dt, entity_list);
+            e->update(dt, entity_list, to_spawn);
         }
+
+        // spawn buffer
+        for (auto& e : to_spawn) {
+            entity_list.push_back(std::move(e));
+        }
+        to_spawn.clear(); // clear the spawn buffer
 
         // look for entities to delete
         entity_list.erase(
@@ -51,12 +57,6 @@ int main() {
                 [](const unique_ptr<Entity>& e) { return e->to_delete; }),
             entity_list.end()
         );
-
-        // spawn buffer
-        for (auto& e : to_spawn) {
-            entity_list.push_back(std::move(e));
-        }
-        to_spawn.clear(); // clear the spawn buffer
 
 		// Clear and display
         window.clear();
