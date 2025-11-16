@@ -10,7 +10,7 @@ using namespace std;
 // (1, 0) is to the right, (0, 1) is to down
 
 int main() {
-	auto window = RenderWindow(VideoMode({480u, 480u}), "Avoidance");
+	auto window = RenderWindow(VideoMode({480u, 480u}), "Ambiguity");
 	window.setFramerateLimit(60);
 
 	vector<unique_ptr<Entity>> entity_list;
