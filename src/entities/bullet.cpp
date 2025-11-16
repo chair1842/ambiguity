@@ -17,6 +17,15 @@ void Bullet::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<un
 		}
 	}
 
+	Entity* player = nullptr;
+	for (const auto& e : entity_list) {
+		if (dynamic_cast<Player*>(e.get())) {
+			player = e.get();
+			break;
+		}
+	}
+	if (!player) { to_delete = true; return; } // no player found
+
 	// will throw an exeption. idk why
 	if (position.x < -rect_size.x || position.x > 480 || position.y < -rect_size.y || position.y > 480) {
 		to_delete = true;

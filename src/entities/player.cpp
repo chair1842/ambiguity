@@ -2,10 +2,12 @@
 
 void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) {
 	if (is_hit && (lives > 0)) {
+		hits.play();
 		lives--;
 		is_hit = false;
 	}
 	else if (lives <= 0) {
+		hits.stop();
 		to_delete = true;
 		return;
 	}
@@ -35,13 +37,15 @@ void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<un
 }
 
 Player::Player(float size, Vector2f pos) 
-	: CollisionEntity(pos, { size, size }) {
+	: CollisionEntity(pos, { size, size }), hits(hitsbuff) {
+	if (!hitsbuff.loadFromFile("hit.wav")) {
+		println("You deleted your audible pain");
+		println("But I DEMAND it");
+		throw runtime_error("Failed to load hit.wav");
+	}
+	hits.setBuffer(hitsbuff);
+
 	auto r = make_unique<RectangleShape>(Vector2f{ size, size });
 	r->setFillColor(Color(128, 128, 255));
 	drawable = move(r);
-}
-
-// to use
-void Player::quit(RenderWindow& window) {
-	window.close();
 }

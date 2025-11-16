@@ -20,6 +20,10 @@ int main() {
 	entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 432 }, 75));
 	entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 432 }, 60));
 
+	for (auto& e : entity_list) {
+		e->enter();
+	}
+
 	auto last_time = chrono::high_resolution_clock::now();
 
 	// Sans
@@ -36,7 +40,7 @@ int main() {
 	// pause text
 	Text pause_text(sans, "Paused", 60);
 	pause_text.setFillColor(Color::White);
-	pause_text.setPosition({ 0, (480 / 2) - 30 });
+	pause_text.setPosition({ 120, (480 / 2) - 30 });
 
 	// Main game loop
 	while (window.isOpen()) {
@@ -70,10 +74,16 @@ int main() {
 			// spawn buffer
 			for (auto& e : to_spawn) {
 				entity_list.push_back(std::move(e));
+				// i will have to call enter() on these
 			}
 			to_spawn.clear(); // clear the spawn buffer
 
-			// look for entities to delete
+			// to delete section
+			for (auto& e : entity_list) { // i have so many entity_list loops
+				if (e->to_delete) {
+					e->exit();
+				}
+			}
 			entity_list.erase(
 				// remove if from all of the entities, if to_delete is true
 				remove_if(entity_list.begin(), entity_list.end(),
@@ -96,4 +106,5 @@ int main() {
 	return 0;
 }
 
-// im so bad at this game fr 3x
+// im so bad at this game fr 6x
+// I GOT GOOD!!!

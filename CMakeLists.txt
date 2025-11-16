@@ -14,4 +14,4 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(ambiguity src/main.cpp "src/entities/player.cpp"  "src/entities/entity.cpp" "src/entities/bullet.cpp" "src/entities/shooter.cpp" "src/entities/collision_entity.cpp")
 target_compile_features(ambiguity PRIVATE cxx_std_23)
-target_link_libraries(ambiguity PRIVATE SFML::Graphics)
+target_link_libraries(ambiguity PRIVATE SFML::Graphics SFML::Audio)
