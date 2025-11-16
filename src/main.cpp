@@ -25,8 +25,8 @@ int main() {
 	// Sans
 	Font sans;
 	if (!sans.openFromFile("StackSansText.tff")) {
-		println("Couldn't load StackSans!");
-		println("Good luck next time myboy");
+		println("StackSansText.tff not found by executable.");
+		println("SOMEONE suspiciously deleted it");
 		return -1;
 	}
 
