@@ -12,18 +12,14 @@ void Bullet::update(float dt, vector<unique_ptr<Entity>>& entity_list) {
 		if (auto player = dynamic_cast<Player*>(e.get())) {
 			if (checkCollision(*player)) {
 				player->is_hit = true;
+				to_delete = true;
 			}
 		}
 	}
 
 	// will throw an exeption. idk why
 	if (position.x < -rect_size.x || position.x > 480 || position.y < -rect_size.y || position.y > 480) {
-		// remove this bullet from entity_list
-		auto it = find_if(entity_list.begin(), entity_list.end(),
-			[this](const unique_ptr<Entity>& e) { return e.get() == this; });
-		if (it != entity_list.end()) {
-			entity_list.erase(it);
-		}
+		to_delete = true;
 	}
 }
 

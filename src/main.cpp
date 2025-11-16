@@ -15,7 +15,7 @@ int main() {
     vector<unique_ptr<Entity>> entity_list;
     entity_list.push_back(make_unique<Player>(32, Vector2f{ 224, 224 }));
 	entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 16 }));
-    entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 16 }));
+    //entity_list.push_back(make_unique<Shooter>(Vector2f{ 432, 16 }));
     //entity_list.push_back(make_unique<Shooter>(Vector2f{ 464, 464 }));
     //entity_list.push_back(make_unique<Shooter>(Vector2f{ 16, 464 }));
 
@@ -41,6 +41,13 @@ int main() {
         for (auto& e : entity_list) {
             e->update(dt, entity_list);
         }
+
+        // look for entities to delete
+        entity_list.erase(
+            remove_if(entity_list.begin(), entity_list.end(),
+                [](const unique_ptr<Entity>& e) { return e->to_delete; }),
+            entity_list.end()
+        );
 
 		// Clear and display
         window.clear();

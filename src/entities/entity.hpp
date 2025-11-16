@@ -10,6 +10,7 @@ public:
     float rotation = 0; // in degrees
     Vector2f rect_size;
     unique_ptr<Drawable> drawable; // points to actual shape or sprite
+    bool to_delete = false;
 
     Entity(Vector2f position = { 0,0 }, Vector2f rect_size = { 0,0 });
 
