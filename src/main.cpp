@@ -95,6 +95,9 @@ int main() {
 			for (auto& e : entity_list) { // i have so many entity_list loops
 				if (e->to_delete) {
 					e->exit();
+					if (auto player = dynamic_cast<Player*>(e.get())) {
+						rain.setVolume(50);
+					}
 				}
 			}
 			entity_list.erase(
