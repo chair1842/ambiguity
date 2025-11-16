@@ -7,6 +7,7 @@ class Player : public CollisionEntity {
 public:
 	const int speed = 500;
 	bool is_hit = false;
+	int lives = 3;
 
 	Player(float size, Vector2f position);
 	void update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) override;

@@ -1,7 +1,11 @@
 #include "player.hpp"
 
 void Player::update(float dt, vector<unique_ptr<Entity>>& entity_list, vector<unique_ptr<Entity>>& to_spawn) {
-	if (is_hit) {
+	if (is_hit && (lives > 0)) {
+		lives--;
+		is_hit = false;
+	}
+	else if (lives <= 0) {
 		to_delete = true;
 		return;
 	}
