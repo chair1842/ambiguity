@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <vector>
 #include <print>
 #include "entities/player.hpp"
@@ -42,12 +43,24 @@ int main() {
 	pause_text.setFillColor(Color::White);
 	pause_text.setPosition({ 120, (480 / 2) - 30 });
 
+	// rain
+	Music rain;
+	if (!rain.openFromFile("rain.wav")) {
+		println("You love the rain, don't you?");
+		println("Or do YOU hate the RAIN?");
+		println("Cause I haven't heard it.");
+		println("\nFailed to load rain.wav");
+	}
+	rain.setVolume(10);
+	rain.setLooping(true);
+	rain.play();
+
 	// Main game loop
 	while (window.isOpen()) {
 		// Poll for events
 		while (const optional event = window.pollEvent())
 		{
-			if (event->is<Event::Closed>()) { window.close(); }
+			if (event->is<Event::Closed>()) { rain.stop(); window.close(); }
 			// Pause
 			if (const auto* key = event->getIf<Event::KeyPressed>()) {
 				if (key->scancode == Keyboard::Scan::Escape) {
